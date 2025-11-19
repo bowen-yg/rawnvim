@@ -47,7 +47,8 @@ end
 
 local esc = api.nvim_replace_termcodes("<Esc>", true, false, true)
 
-key.set("n","<leader>Q",":q<CR>")
+key.set("n","<leader>q",":q<CR>",{noremap=true})
+key.set("n","<leader>Q",":qall<CR>",{noremap=true})
 key.set("n","<leader>|",":vsplit ")
 key.set("n","<leader>-",":split ")
 
@@ -91,3 +92,11 @@ key.set("n","<A-j>",function() duplicate_line(1) end,o)
 key.set("t","<Esc>","<C-\\><C-n>")
 key.set("n","<C-`>",":vsplit | terminal<CR>",o)
 key.set("n","<leader>/",":split | terminal<CR>",o)
+-- key.set("n","<C-<leader>>","<C-x>",o)
+key.set("i", "<Up>", function()
+  return vim.fn.pumvisible() == 1 and "<C-p>" or "<Up>"
+end, { noremap = true, silent = true, expr = true })
+
+key.set("i", "<Down>", function()
+  return vim.fn.pumvisible() == 1 and "<C-n>" or "<Down>"
+end, { noremap = true, silent = true, expr = true })

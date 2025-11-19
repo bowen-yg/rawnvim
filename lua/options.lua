@@ -10,6 +10,7 @@ opt.expandtab=true
 opt.breakindent=true
 
 opt.termguicolors=true
+opt.showmode=false
 opt.signcolumn="number"
 vim.o.cursorline=true
 opt.inccommand='split'
