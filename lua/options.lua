@@ -14,6 +14,7 @@ opt.showmode=false
 opt.signcolumn="number"
 vim.o.cursorline=true
 opt.inccommand='split'
+opt.clipboard="unnamedplus"
 opt.confirm=true
 opt.list=true
 opt.listchars={

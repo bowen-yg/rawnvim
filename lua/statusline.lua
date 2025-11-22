@@ -59,16 +59,18 @@ local function statusline()
 end
 
 apply_statusline = function()
-	vim.o.statusline = statusline()
+    vim.o.statusline = statusline()
 end
 
-local group = api.nvim_create_augroup("custom_statusline", { clear = true })
-api.nvim_create_autocmd({ "BufEnter", "BufWinEnter", "WinEnter", "ModeChanged" }, {
-	group = group,
-	callback = apply_statusline,
-})
-
-setup_timer()
-apply_statusline()
+-- 不在模块加载时自动注册/启动；改成显式 setup
+M.setup = function()
+    local group = api.nvim_create_augroup("custom_statusline", { clear = true })
+    api.nvim_create_autocmd({ "BufEnter", "BufWinEnter", "WinEnter", "ModeChanged" }, {
+        group = group,
+        callback = apply_statusline,
+    })
+    setup_timer()
+    apply_statusline()
+end
 
 return M
