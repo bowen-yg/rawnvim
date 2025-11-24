@@ -3,7 +3,7 @@ require("keymap")
 require("autopairs").setup()
 require("statusline").setup()
 if vim.g.neovide then
-  vim.o.guifont = "Maple Mono NF:h18"
+  vim.o.guifont = "Maple Mono NF:h16"
   vim.g.neovide_floating_blur_amount_x = 5.0
   vim.g.neovide_floating_blur_amount_y = 3.0
   vim.g.neovide_floating_corner_radius = 0.8

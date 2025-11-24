@@ -2,49 +2,8 @@
 local key = vim.keymap
 local api = vim.api
 local commenter = require("commenter")
+local move = require("move")
 vim.g.mapleader = ' '
-
-local function clamp_col(text, col)
-	local len = #text
-	if col > len then
-		return len
-	end
-	return col
-end
-
-local function move_line(delta)
-	local buf = api.nvim_get_current_buf()
-	local total = api.nvim_buf_line_count(buf)
-	local cursor = api.nvim_win_get_cursor(0)
-	local row, col = cursor[1], cursor[2]
-	local dest = row + delta
-	if dest < 1 or dest > total then
-		return
-	end
-	local line = api.nvim_buf_get_lines(buf, row - 1, row, false)
-	if #line == 0 then
-		return
-	end
-	api.nvim_buf_set_lines(buf, row - 1, row, false, {})
-	api.nvim_buf_set_lines(buf, dest - 1, dest - 1, false, line)
-	local new_col = clamp_col(line[1], col)
-	api.nvim_win_set_cursor(0, { dest, new_col })
-end
-
-local function duplicate_line(delta)
-	local buf = api.nvim_get_current_buf()
-	local cursor = api.nvim_win_get_cursor(0)
-	local row, col = cursor[1], cursor[2]
-	local line = api.nvim_buf_get_lines(buf, row - 1, row, false)
-	if #line == 0 then
-		line = { "" }
-	end
-	local insert_at = delta < 0 and (row - 1) or row
-	api.nvim_buf_set_lines(buf, insert_at, insert_at, false, line)
-	local target_row = row + (delta > 0 and 1 or 0)
-	local new_col = clamp_col(line[1], col)
-	api.nvim_win_set_cursor(0, { target_row, new_col })
-end
 
 local register_win
 
@@ -135,10 +94,14 @@ key.set({"n","i"},"<C-s>",function()
 	vim.api.nvim_echo({{" All Changes are Saved ","MoreMsg"}}, false, {})
 end,o)
 
-key.set("n","<A-Up>",function() move_line(-1) end,o)
-key.set("n","<A-Down>",function() move_line(1) end,o)
-key.set("n","<A-k>",function() duplicate_line(-1) end,o)
-key.set("n","<A-j>",function() duplicate_line(1) end,o)
+key.set("n","<A-Up>",function() move.move_line(-1) end,o)
+key.set("n","<A-Down>",function() move.move_line(1) end,o)
+key.set("v","<A-Up>",function() move.move_block(-1) end,o)
+key.set("v","<A-Down>",function() move.move_block(1) end,o)
+key.set("n","<A-k>",function() move.duplicate_line(-1) end,o)
+key.set("n","<A-j>",function() move.duplicate_line(1) end,o)
+key.set("v","<A-k>",function() move.duplicate_block(-1) end,o)
+key.set("v","<A-j>",function() move.duplicate_block(1) end,o)
 key.set("t","<Esc>","<C-\\><C-n>")
 key.set("n","<Esc>",function()
   vim.cmd("nohlsearch")
@@ -155,4 +118,4 @@ key.set("i", "<Down>", function()
   return vim.fn.pumvisible() == 1 and "<C-n>" or "<Down>"
 end, { noremap = true, silent = true, expr = true })
 
-key.set("n","<C-r>",show_registers_float,o)
+key.set("n","<A-r>",show_registers_float,o)
