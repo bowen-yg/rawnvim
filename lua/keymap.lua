@@ -1,8 +1,8 @@
 ---@diagnostic disable: undefined-global
 local key = vim.keymap
 local api = vim.api
-local commenter = require("commenter")
-local move = require("move")
+local commenter = require("config.commenter")
+local move = require("config.move")
 vim.g.mapleader = ' '
 
 local register_win
@@ -119,3 +119,5 @@ key.set("i", "<Down>", function()
 end, { noremap = true, silent = true, expr = true })
 
 key.set("n","<A-r>",show_registers_float,o)
+key.set("n","<A-f>",":lua require('fzf-lua')<CR>",o)
+key.set("n","L",":Lazy<CR>",o)

@@ -2,6 +2,7 @@ require("options")
 require("keymap")
 require("autopairs").setup()
 require("statusline").setup()
+require("config.lazy")
 if vim.g.neovide then
   vim.o.guifont = "Maple Mono NF:h16"
   vim.g.neovide_floating_blur_amount_x = 5.0
