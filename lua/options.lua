@@ -3,10 +3,12 @@ local opt=vim.opt
 -- opt.number=true
 opt.relativenumber=true
 
-opt.tabstop=2
+opt.tabstop=4
+opt.softtabstop=4
 opt.autoindent=true
-opt.shiftwidth=2
-opt.expandtab=true
+opt.smartindent=true
+opt.shiftwidth=4
+opt.expandtab=false
 opt.breakindent=true
 
 opt.termguicolors=true
@@ -18,8 +20,10 @@ opt.clipboard="unnamedplus"
 opt.confirm=true
 opt.list=true
 opt.listchars={
-  trail='.',
-	tab='->'
+	trail='_',
+	tab='->',
+	space='.',
+	--eol=''
 }
 opt.undofile=false
 opt.ignorecase=true
@@ -27,7 +31,6 @@ opt.smartcase=true
 vim.g.have_nerd_font=true
 
 vim.o.background="dark"
-vim.cmd.colorscheme 'retrobox'
 
 opt.splitright=true
 opt.splitbelow=true

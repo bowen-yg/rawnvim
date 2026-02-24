@@ -16,9 +16,9 @@ local mode_names = {
 	c = "COMMAND",
 	["!"] = "SHELL",
 	t = "    ",
-  nt="  󰾉  ",
-  ix="    ",
-  ic="  󰕲  "
+	nt="  󰾉  ",
+	ix="   ACP",
+	ic="  󰕲  "
 }
 
 local function format_mode()
@@ -47,13 +47,10 @@ end
 
 local function statusline()
 	local left = table.concat({
-		"  ", format_mode(), "  ",
-		"%#Comment#",
-		" ", " %f %m  %L",
+		"%#Search#", "  ", format_mode(),"  ", "%#Keyword#", " ", " %f %m  %L",
 	})
 	local right = table.concat({
-		"%#Normal#",
-		"|%l:%c|   %P ", " ",cached_time, " ",
+		"%#String#", " %y  %n ", "%#lCursor#", "|%l:%c|   %P ", " ",cached_time, " ",
 	})
 	return table.concat({ left, "%=", right })
 end
@@ -62,7 +59,6 @@ apply_statusline = function()
     vim.o.statusline = statusline()
 end
 
--- 不在模块加载时自动注册/启动；改成显式 setup
 M.setup = function()
     local group = api.nvim_create_augroup("custom_statusline", { clear = true })
     api.nvim_create_autocmd({ "BufEnter", "BufWinEnter", "WinEnter", "ModeChanged" }, {
