@@ -47,10 +47,10 @@ end
 
 local function statusline()
 	local left = table.concat({
-		"%#Search#", "  ", format_mode(),"  ", "%#Keyword#", " ", " %f %m  %L",
+		"%#Search#", "  ", format_mode(),"   ", "%#Keyword#", " ", " %f %m |%l:%c|",
 	})
 	local right = table.concat({
-		"%#String#", " %y  %n ", "%#lCursor#", "|%l:%c|   %P ", " ",cached_time, " ",
+		"%#String#", " %y  %n ", "%#lCursor#", "  %L   %P ", " ",cached_time, " ",
 	})
 	return table.concat({ left, "%=", right })
 end

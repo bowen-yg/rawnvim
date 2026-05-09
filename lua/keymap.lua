@@ -22,7 +22,7 @@ local function show_registers_float()
 	for _, line in ipairs(lines) do
 		width = math.max(width, #line)
 	end
-	width = math.max(30, math.min(width + 2, math.floor(vim.o.columns * 0.6)))
+	width = math.max(30, math.min(width + 2, math.floor(vim.o.columns * 0.8)))
 
 	local available_height = math.max(5, vim.o.lines )
 	local height = math.min(#lines, available_height)
@@ -123,4 +123,4 @@ key.set("n","<A-f>",":lua require('fzf-lua')<CR>",o)
 key.set("n","L",":Lazy<CR>",o)
 key.set("n","<leader>f",":FzfLua files<CR>",o)
 key.set("n","<leader>b",":FzfLua buffers<CR>",o)
-key.set("n","<leader>c","FzfLua blines<CR>",o)
+key.set("n","<leader>l",":FzfLua blines<CR>",o)
