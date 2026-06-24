@@ -28,7 +28,7 @@ opt.list=true
 opt.listchars={
 	trail='_',
 	tab='->',
-	space='.',
+	-- space='.',
 	--eol=''
 }
 opt.undofile=false
@@ -41,14 +41,14 @@ vim.o.background="dark"
 opt.splitright=true
 opt.splitbelow=true
 
-vim.diagnostic.config({
-	signs = true,
-	underline = true,
-	virtual_text = true,
-	virtual_libes = false,
-	float = {
-		header = "",
-		border = 'rounded',
-		focusable = true,
-	}
-})
+-- vim.diagnostic.config({
+	-- signs = true,
+	-- underline = true,
+	-- virtual_text = true,
+	-- virtual_lines = false,
+	-- float = {
+		-- header = "",
+		-- border = 'rounded',
+		-- focusable = true,
+	-- }
+-- })

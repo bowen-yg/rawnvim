@@ -6,7 +6,11 @@ return {
   ---@type fzf-lua.Config|{}
   ---@diagnostics disable: missing-fields
   opts = {
-    winopts={ preview = {layout = "horizontal",} },
+    fzf_bin = 'sk',
+    winopts={
+      height= 0.90,
+      width= 0.85,
+      preview = {layout = "horizontal",} },
   },
   ---@diagnostics enable: missing-fields
 }
